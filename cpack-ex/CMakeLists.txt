@@ -17,8 +17,6 @@ find_package(yaml-cpp
   0.6.0
   REQUIRED
   )
-# Include yamlcpp dirs
-include_directories(${YAMLCPP_INCLUDE_DIRS})
 
 add_library(cpackexamplelib filesystem/filesystem.cpp fem/fem.cpp flatset/flatset.cpp yamlParser/yamlParser.cpp)
 
