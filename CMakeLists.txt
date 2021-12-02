@@ -24,5 +24,17 @@ add_executable("${PROJECT_NAME}" main.cpp)
 target_link_libraries("${PROJECT_NAME}" cpackexamplelib)
 target_link_libraries(cpackexamplelib Boost::filesystem ${YAML_CPP_LIBRARIES})
 
+target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC flatset filesystem fem yamlParser)
+
 DEAL_II_SETUP_TARGET("${PROJECT_NAME}")
 DEAL_II_SETUP_TARGET(cpackexamplelib)
+
+# Create install targets
+include(GNUInstallDirs)
+install(TARGETS cpackexample
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cpackexample
+  INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cpackexample
+  )
