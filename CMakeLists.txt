@@ -30,7 +30,7 @@ target_include_directories(cpackexamplelib
 
 add_executable("${PROJECT_NAME}" main.cpp)
 target_link_libraries("${PROJECT_NAME}" cpackexamplelib)
-target_link_libraries(cpackexamplelib Boost::filesystem ${YAML_CPP_LIBRARIES})
+target_link_libraries(cpackexamplelib Boost::filesystem yaml-cpp)
 
 DEAL_II_SETUP_TARGET("${PROJECT_NAME}")
 DEAL_II_SETUP_TARGET(cpackexamplelib)
