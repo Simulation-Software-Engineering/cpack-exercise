@@ -3,8 +3,8 @@ FROM ubuntu:20.04
 SHELL ["/bin/bash", "-c"]
 
 # set working directory
-ADD . /cmake-exercise
-WORKDIR /cmake-exercise
+ADD . /cpack-exercise
+WORKDIR /cpack-exercise
 
 # include time zone info
 RUN chmod +x inittimezone
@@ -22,9 +22,10 @@ RUN PATH="/usr/local/bin":"${PATH}"
 RUN mkdir build \
 && cd build \
 && cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release .. \
-&& make -j
-
-# create tar.gz and deb packages
-RUN cd build \
 && make package
+
+# check generated packages
+RUN cd build \
+&& dpkg -i cpackexample_0.2.0_amd64.deb \
+&& ./cpackexample
 
