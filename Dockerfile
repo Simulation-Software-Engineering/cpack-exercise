@@ -19,8 +19,12 @@ RUN apt install -y build-essential cmake git vim libboost-all-dev libdeal.ii-dev
 RUN PATH="/usr/local/bin":"${PATH}"
 
 # create build directory and make executable
-#RUN mkdir build \
-#&& cd build \
-#&& cmake .. \
-#&& make
+RUN mkdir build \
+&& cd build \
+&& cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release .. \
+&& make -j
+
+# create tar.gz and deb packages
+RUN cd build \
+&& make package
 
