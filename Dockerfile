@@ -15,16 +15,8 @@ RUN /usr/local/bin/inittimezone
 RUN apt -y update
 RUN apt install -y build-essential cmake git vim libboost-all-dev libdeal.ii-dev libopenmpi-dev libyaml-cpp-dev
 
-# install yaml-cpp
-#RUN git clone https://github.com/jbeder/yaml-cpp \
-#&& cd yaml-cpp \
-#&& mkdir build \
-#&& cd build \
-#&& cmake -YAML_BUILD_SHARED_LIBRARY=ON .. \
-#&& make \
-#&& make install
-# clean up after installation
-#RUN rm -rf yaml-cpp
+# set path variable correctly
+RUN PATH="/usr/local/bin":"${PATH}"
 
 # create build directory and make executable
 #RUN mkdir build \
