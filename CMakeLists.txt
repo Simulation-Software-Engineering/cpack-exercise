@@ -18,7 +18,7 @@ find_package(yaml-cpp
   REQUIRED
   )
   
-include_directories("${YAMLCPP_INCLUDE_DIR}")
+include_directories("${YAML_CPP_INCLUDE_DIR}")
 
 add_library(cpackexamplelib filesystem/filesystem.cpp fem/fem.cpp flatset/flatset.cpp yamlParser/yamlParser.cpp)
 
@@ -29,11 +29,24 @@ target_link_libraries(cpackexamplelib Boost::filesystem ${YAML_CPP_LIBRARIES})
 DEAL_II_SETUP_TARGET("${PROJECT_NAME}")
 DEAL_II_SETUP_TARGET(cpackexamplelib)
 
+set_target_properties(cpackexamplelib PROPERTIES PUBLIC_HEADER "fem/fem.hpp;filesystem/filesystem.hpp;flatset/flatset.hpp;yamlParser/yamlParser.hpp")
+
+target_include_directories(cpackexamplelib
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}>
+)
+
 include(GNUInstallDirs)
-install(TARGETS ${PROJECT_NAME}
+install(TARGETS ${PROJECT_NAME} cpackexamplelib
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cpackexamplelib
   INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cpackexamplelib
   )
+  
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(MyPackagingModule)
