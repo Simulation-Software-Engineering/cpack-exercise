@@ -1,30 +1,44 @@
-From ubuntu:20.04
+# how run the container:
+# docker build -t <image_name> . 
+# docker run -it --name <container_name> <image_name>
+
+FROM ubuntu:20.04
 
 COPY inittimezone /usr/local/bin/inittimezone
+RUN chmod +x /usr/local/bin/inittimezone
 
-# Run inittimezone and install a few dependencies
+# Install a remaining dependencies
 RUN apt-get -qq update && \
-    inittimezone && \
-    apt-get -qq -y install \
+        inittimezone && \
+        apt-get -qq -y install \
         build-essential \
         cmake \
         g++ \
-        git \
-        libboost-all-dev \
         wget \
+        nano \
+        libboost-all-dev \
         libdeal.ii-dev \
-        vim
+        libyaml-cpp-dev
+        
 
-# This is some strang Docker problem. Normally, you don't need to add /usr/local/lib to LIBRARY_PATH
+# This is some strange Docker problem. Normally, you don't need to add /usr/local/lib to LIBRARY_PATH
 ENV LIBRARY_PATH $LIBRARY_PATH:/usr/local/lib/
 
-# Get, unpack, build, and install yaml-cpp        
-RUN mkdir Software && cd Software && \
-    wget https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.7.0.tar.gz && \
-    tar -xvzf yaml-cpp-0.7.0.tar.gz && \
-    cd yaml-cpp-yaml-cpp-0.7.0 && mkdir build && cd build && \
-    cmake -DYAML_BUILD_SHARED_LIBS=OFF .. && make -j4 && make install
+# Copy complete folder
+ADD . /cpack-exercise
 
-# I just copy the complete folder to the container
-ADD . /cmake-exercise
+# Change working directory
+WORKDIR /cpack-exercise
+
+# Create package
+RUN mkdir build && \
+        cd build && \
+        cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release .. && \
+        cpack -G TGZ && \
+        cpack -G DEB
+
+# Install and run debian package
+RUN cd build && \
+        apt-get install ./cpackexample-0.2.0-Linux.deb
+RUN cpackexample ./yamlParser/config.yml
 CMD ["/bin/bash"]
