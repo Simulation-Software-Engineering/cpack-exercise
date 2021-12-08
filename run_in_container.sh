@@ -1,0 +1,1 @@
+cp cpackexample_0.2.0_amd64.deb ../../mnt/package-build-dir/ && cp cpackexample-0.2.0-Linux.tar.gz ../../mnt/package-build-dir/

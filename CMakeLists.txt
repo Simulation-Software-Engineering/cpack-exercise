@@ -19,7 +19,6 @@ find_package(yaml-cpp
   )
 
 add_library(cpackexamplelib filesystem/filesystem.cpp fem/fem.cpp flatset/flatset.cpp yamlParser/yamlParser.cpp)
-set_target_properties(cpackexamplelib PROPERTIES PUBLIC_HEADER "filesystem/filesystem.hpp;fem/fem.hpp;flatset/flatset.hpp;yamlParser/yamlParser.hpp")
 
 add_executable("${PROJECT_NAME}" main.cpp)
 target_link_libraries("${PROJECT_NAME}" cpackexamplelib)
@@ -27,6 +26,8 @@ target_link_libraries(cpackexamplelib Boost::filesystem ${YAML_CPP_LIBRARIES})
 
 DEAL_II_SETUP_TARGET("${PROJECT_NAME}")
 DEAL_II_SETUP_TARGET(cpackexamplelib)
+
+set_target_properties(cpackexamplelib PROPERTIES PUBLIC_HEADER "filesystem/filesystem.hpp;fem/fem.hpp;flatset/flatset.hpp;yamlParser/yamlParser.hpp")
 
 include(GNUInstallDirs)
 install(TARGETS "${PROJECT_NAME}" cpackexamplelib
