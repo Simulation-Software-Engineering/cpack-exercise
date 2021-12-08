@@ -8,7 +8,9 @@ RUN git clone https://github.com/EvanA93/cpack-exercise.git
 
 WORKDIR /cpack-exercise
 
+ENV LIBRARY_PATH $LIBRARY_PATH:/usr/local/lib/
 COPY inittimezone /usr/local/bin/inittimezone
+RUN chmod +x /usr/local/bin/inittimezone
 RUN /usr/local/bin/inittimezone
 
 RUN apt-get install -y build-essential && apt-get install -y cmake && apt-get install -y libboost-all-dev\
