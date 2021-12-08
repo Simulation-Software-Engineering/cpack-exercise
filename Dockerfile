@@ -17,4 +17,4 @@ RUN apt-get install -y build-essential && apt-get install -y cmake && apt-get in
 && apt-get install -y libdeal.ii-dev && apt-get install -y libopenmpi-dev && apt-get install -y libyaml-cpp-dev
 
 RUN mkdir CPackExercise_build && cd CPackExercise_build && cmake  .. && \
-make package && apt-get install ./cpackexample-0.2.0_amd64.deb && cpackexample ./yamlParser/config.yml
+make package && apt-get install ./cpackexample_0.2.0_amd64.deb && cpackexample ../yamlParser/config.yml
