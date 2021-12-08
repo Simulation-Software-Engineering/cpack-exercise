@@ -39,3 +39,7 @@ install(TARGETS ${PROJECT_NAME} cpackexamplelib
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cpackexamplelib
     INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cpackexamplelib
     )
+
+# Include path and cmake file for packaging
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(MyPackagingModule)
