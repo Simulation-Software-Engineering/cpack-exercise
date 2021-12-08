@@ -23,5 +23,5 @@ RUN apt update && apt install -y g++ && apt install -y build-essential && apt in
 WORKDIR /cpack-exercise
 
 # Build the executable
-RUN mkdir build && cd build && cd .. && rm -r build/ && mkdir build && cd build && cmake .. && make
+RUN mkdir build && cd build && cmake .. && make package
 
