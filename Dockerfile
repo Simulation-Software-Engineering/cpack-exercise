@@ -2,8 +2,7 @@
 FROM ubuntu:20.04
 
 # Copy files to Docker container
-RUN mkdir cpack-exercise
-COPY cpack-ex/ /cpack-exercise/
+COPY . /cpack-exercise/
 
 CMD ["/bin/bash"]
 
@@ -12,7 +11,8 @@ COPY inittimezone /usr/local/bin/inittimezone
 RUN /usr/local/bin/inittimezone
 
 # Install software packages
-RUN apt update && apt install -y g++ && apt install -y build-essential && apt install -y cmake && apt install -y git && apt install -y wget && apt install -y vim && apt install -y libboost-all-dev && apt install -y libdeal.ii-dev && apt install -y libopenmpi-dev && apt install -y libyaml-cpp-dev
+RUN apt update && apt install -y g++ build-essential cmake git wget vim libboost-all-dev  libdeal.ii-dev libyaml-cpp-dev
+
 
 # RUN git clone https://github.com/jbeder/yaml-cpp && cd yaml-cpp && mkdir build && cd build && cmake -YAML_BUILD_SHARED_LIBRARY=ON .. && make install
 
@@ -23,5 +23,5 @@ RUN apt update && apt install -y g++ && apt install -y build-essential && apt in
 WORKDIR /cpack-exercise
 
 # Build the executable
-RUN mkdir build && cd build && cmake .. && make package
+# RUN mkdir build && cd build && cmake .. && make package
 
