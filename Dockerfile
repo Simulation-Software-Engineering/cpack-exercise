@@ -23,5 +23,5 @@ RUN apt update && apt install -y g++ build-essential cmake git wget vim libboost
 WORKDIR /cpack-exercise
 
 # Build the executable
-# RUN mkdir build && cd build && cmake .. && make package
+RUN mkdir build && cd build && cmake .. && make package
 
