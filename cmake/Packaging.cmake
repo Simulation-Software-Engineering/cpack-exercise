@@ -1,0 +1,16 @@
+set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
+
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "SSE Execrsie of cpack")
+
+set(CPACK_PACKAGE_VENDOR "SSE Lecturers Student")
+set(CPACK_PACKAGE_CONTACT "st157541@stud.uni-stuttgart.de")
+set(CPACK_PACKAGE_MAINTAINERS "SSE lecturers ${CPACK_PACKAGE_CONTACT}")
+set(CPACK_PACKAGE_HOMEPAGE_URL "https://simulation-software-engineering.github.io/homepage/")
+set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+
+set(CPACK_STRIP_FILES TRUE)
+# Debian specific changes
+set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS YES)
+
+include(CPack)
