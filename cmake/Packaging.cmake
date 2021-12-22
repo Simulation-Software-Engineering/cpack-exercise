@@ -1,0 +1,16 @@
+set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "SSE cpack packaging exercise"
+    CACHE STRING "Extended summary of SSE cpack packaging exercise")
+set(CPACK_PACKAGE_VENDOR "Alexander Strack")
+set(CPACK_PACKAGE_CONTACT "strack.as@icloud.com")
+set(CPACK_PACKAGE_MAINTAINERS "SSE student ${CPACK_PACKAGE_CONTACT}")
+set(CPACK_PACKAGE_HOMEPAGE_URL "https://simulation-software-engineering.github.io/homepage/")
+set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
+set(CPACK_STRIP_FILES TRUE)
+include(CPack)
+
+# Debian packaging section
+set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS YES)
